@@ -1,10 +1,18 @@
-import { createApp } from 'vue'
-import App from './App.vue'
-import router from './router'
-import PrimeVue from 'primevue/config';
+import './assets/main.css'
 import 'primevue/resources/themes/aura-light-green/theme.css'
+import 'primeicons/primeicons.css'
+import "vue-simple-calendar/dist/style.css"
+import PrimeVue from 'primevue/config'
+import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 
-const pinia = createPinia();
+import App from './App.vue'
+import router from './router'
 
-createApp(App).use(pinia).use(PrimeVue).use(router).mount('#app')
+const app = createApp(App)
+
+app.use(createPinia())
+app.use(router)
+app.use(PrimeVue);
+
+app.mount('#app')
