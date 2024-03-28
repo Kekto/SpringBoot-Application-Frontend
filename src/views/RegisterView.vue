@@ -3,12 +3,15 @@ import Card from 'primevue/card';
 import InputText from 'primevue/inputtext';
 import InlineMessage from 'primevue/inlinemessage';
 import Button from 'primevue/button';
+import {useAuthStore} from '@/stores/authStore'
 
 import {computed, ref} from 'vue';
 import {useRouter} from "vue-router";
 
 const loading = ref(false);
 const router = useRouter();
+
+const authStore = useAuthStore();
 
 const load = () => {
   loading.value = true;
@@ -17,6 +20,16 @@ const load = () => {
     router.push({name: 'home'});
   }, 2000);
 };
+
+const register = () => {
+
+  const user = {
+    username: username.value,
+    password: password.value
+  }
+
+  authStore.registerUser(user)
+}
 
 const username = ref<undefined | string>(undefined);
 const password = ref<undefined | string>(undefined);
@@ -93,7 +106,7 @@ const submitDisabled = computed(() => paswordsDiffer(passwordCheck.value) || !pa
             label="Zarejestruj"
             :disabled="submitDisabled"
             :loading="loading"
-            @click="load"
+            @click="register"
         />
       </div>
     </template>

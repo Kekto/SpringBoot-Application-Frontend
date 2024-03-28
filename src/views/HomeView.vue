@@ -19,24 +19,29 @@ function selectTime(timeCardId:number) {
   <Card class="home">
     <template #title>Zakup biletu</template>
     <template #content>
-        <TimeCard 
-            time="18:00 - 19:30" 
-            class="time__card" 
-            id="time_card_1" 
-            title="Tor: Rakieta" 
-            @click="selectTime(1)"/>
-        <TimeCard 
-            time="19:30 - 21:00" 
-            class="time__card" 
-            id="time_card_2" 
-            title="Tor: Turbina" 
-            @click="selectTime(2)"/>
-        <TimeCard 
-            time="21:00 - 22:30" 
-            class="time__card" 
-            id="time_card_3" 
-            title="Tor: Rakieta"
-            @click="selectTime(3)"/>
+        <div class="timer__cards">
+            <TimeCard 
+                time="18:00 - 19:30" 
+                class="time__card" 
+                id="time_card_1" 
+                title="Tor: Rakieta" 
+                @click="selectTime(1)"
+            />
+            <TimeCard 
+                time="19:30 - 21:00" 
+                class="time__card" 
+                id="time_card_2" 
+                title="Tor: Turbina" 
+                @click="selectTime(2)"
+            />
+            <TimeCard 
+                time="21:00 - 22:30" 
+                class="time__card" 
+                id="time_card_3" 
+                title="Tor: Rakieta"
+                @click="selectTime(3)"
+            />
+        </div>
     </template>
   </Card>
 </template>
