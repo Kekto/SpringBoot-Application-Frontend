@@ -28,7 +28,6 @@ const items = ref([
  <div class="topbar-layout">
    <Menubar :model="items">
      <template #start>
-       <img src="https://compu-kart.co.za/wp-content/uploads/2023/01/logo.png" alt="logo" height="60px">
      </template>
      <template #item="{ item, props }">
        <router-link v-if="item.name" v-slot="{ href, navigate }" :to="{name: item.name}" custom>

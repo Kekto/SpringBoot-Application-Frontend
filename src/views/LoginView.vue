@@ -6,9 +6,11 @@ import Button from 'primevue/button';
 
 import {computed, ref} from 'vue';
 import {useRouter} from "vue-router";
+import {useAuthStore} from '@/stores/authStore'
 
 const loading = ref(false);
 const router = useRouter();
+const authStore = useAuthStore();
 
 const load = () => {
   loading.value = true;
@@ -17,6 +19,14 @@ const load = () => {
     router.push({name: 'home'});
   }, 2000);
 };
+
+const login = () => {
+  const user = {
+    username: username.value,
+    password: password.value
+  }
+  authStore.loginUser(user);
+}
 
 const username = ref<undefined | string>(undefined);
 const password = ref<undefined | string>(undefined);
@@ -75,7 +85,7 @@ const submitDisabled = computed(() => !password.value || !username.value);
             label="Zaloguj"
             :disabled="submitDisabled"
             :loading="loading"
-            @click="load"
+            @click="login"
         />
       </div>
     </template>

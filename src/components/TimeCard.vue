@@ -2,18 +2,18 @@
 import Card from 'primevue/card';
 
 defineProps<{
-  time: string,
-  title: string
+  title: string,
+  description: string
 }>()
 
 </script>
 
 <template>
 <Card class="timer__card">
-    <template #title> {{ time }}</template>
+    <template #title> {{ title }}</template>
     <template #content>
       <div class="row">
-        {{ title }}
+        {{ description }}
       </div>
     </template>
   </Card>

@@ -22,12 +22,10 @@ const load = () => {
 };
 
 const register = () => {
-
   const user = {
     username: username.value,
     password: password.value
   }
-
   authStore.registerUser(user)
 }
 
