@@ -6,6 +6,7 @@ import { useTaskStore } from '@/stores/taskStore';
 import Dialog from 'primevue/dialog';
 import InputText from 'primevue/inputtext';
 import { ref, computed } from 'vue'
+import { useAuthStore } from '@/stores/authStore';
 
 // Time card
 function selectTime(timeCardId:number) {
@@ -18,6 +19,9 @@ function selectTime(timeCardId:number) {
 
     selectedTimeCard?.classList.add("selected");
 };
+
+// Auth Store
+const authStore = useAuthStore();
 
 // Task Store
 const taskStore = useTaskStore();
@@ -62,20 +66,30 @@ const taskAdd = {
                     type="button"
                     label="Dodaj"
                     @click="visibleAdd = true"
+                    :disabled ="!authStore.authorized"
                 />
             </div>
         </div>
 
     </template>
     <template #content>
-        <div class="timer__cards" v-for="task in taskStore.tasks" :key="task">
-            <TimeCard 
-                :title=task.title
-                class="time__card" 
-                :id=task.id 
-                :description=task.description 
-                @click="selectTime(1)"
-            />
+        <div v-if="!authStore.authorized">
+            Zaloguj się aby zobaczyć lub modyfikować listę zadań.
+        </div>
+        <div v-else>
+            <div class="timer__cards" v-for="task in taskStore.tasks" :key="task">
+                <TimeCard 
+                    :title=task.title
+                    class="time__card"
+                    :taskId="task.id"
+                    :id=task.id 
+                    :description=task.description 
+                    @click="selectTime(1)"
+                />
+            </div>
+            <div v-if=!taskStore.tasks>
+                Nie ma żadnych zadań do wyświetlenia
+            </div>
         </div>
     </template>
   </Card>

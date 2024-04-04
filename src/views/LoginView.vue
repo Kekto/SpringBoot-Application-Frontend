@@ -40,7 +40,6 @@ const submitDisabled = computed(() => !password.value || !username.value);
   <Card class="login">
     <template #title >
       <div class="login__title">
-        <img src="https://compu-kart.co.za/wp-content/uploads/2023/01/logo.png" alt="logo">
         <h1>Logowanie</h1>
       </div>
     </template>

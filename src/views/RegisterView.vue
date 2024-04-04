@@ -43,7 +43,6 @@ const submitDisabled = computed(() => paswordsDiffer(passwordCheck.value) || !pa
   <Card class="register">
     <template #title >
       <div class="register__title">
-        <img src="https://compu-kart.co.za/wp-content/uploads/2023/01/logo.png" alt="logo">
         <h1>Rejestracja</h1>
       </div>
     </template>

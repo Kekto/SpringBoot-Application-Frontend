@@ -4,6 +4,9 @@ import Menubar from 'primevue/menubar'
 import Button from 'primevue/button';
 import Divider from "primevue/divider";
 import 'primeicons/primeicons.css'
+import { useAuthStore } from "@/stores/authStore";
+
+const authStore = useAuthStore();
 
 const items = ref([
   {
@@ -41,7 +44,8 @@ const items = ref([
       <div class="row">
         <Divider layout="vertical"/>
         <router-link :to="{name: 'login'}">
-          <Button label="Wyloguj"/>
+          <Button v-if="authStore.authorized" label="Wyloguj" @click="authStore.logoutUser"/>
+          <Button v-if="!authStore.authorized" label="Zaloguj" @click="authStore.logoutUser"/>
         </router-link>
       </div>
 
