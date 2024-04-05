@@ -5,6 +5,7 @@ import Dialog from 'primevue/dialog';
 import { ref, computed } from 'vue'
 import InputText from 'primevue/inputtext';
 import { useTaskStore } from '@/stores/taskStore';
+import { useAuthStore } from '@/stores/authStore';
 
 defineProps<{
   title: string,
@@ -13,6 +14,7 @@ defineProps<{
 }>()
 
 const taskStore = useTaskStore();
+const authStore = useAuthStore();
 
 // Edit Dialog
 
@@ -36,13 +38,49 @@ function deleteTask(id:number) {
 
 }
 
+// Favourited
 
+function favourite(title:String, description:String, id: number){
+  const task = {
+    id: id,
+    title: title,
+    description: description
+  } 
 
+  authStore.favourite(authStore.username, task);
+}
+
+function unfavourite(title:String, description:String, id: number){
+  const task = {
+    id: id,
+    title: title,
+    description: description
+  } 
+  authStore.unfavourite(authStore.username ,task);
+}
 </script>
 
 <template>
   <Card class="timer__card">
-    <template #title> {{ title }}</template>
+    <template #title>
+      <div class="row">
+        {{ title }}
+        <div class="button__bar row">
+          <Button
+              type="button"
+              icon="pi pi-star"
+              @click="favourite(title, description, taskId)"
+              v-if="1"
+          />
+          <Button
+              type="button"
+              icon="pi pi-star-fill"
+              @click="unfavourite(title, description, taskId)"
+              v-if="1"
+          />
+        </div>
+      </div>
+    </template>
     <template #content>
       <div class="row">
         <div>

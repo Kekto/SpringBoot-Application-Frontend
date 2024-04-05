@@ -8,18 +8,6 @@ import InputText from 'primevue/inputtext';
 import { ref, computed } from 'vue'
 import { useAuthStore } from '@/stores/authStore';
 
-// Time card
-function selectTime(timeCardId:number) {
-  const timeCards = document.getElementsByClassName('time__card');
-  const selectedTimeCard = document.getElementById('time_card_'+timeCardId);
-
-    for(let card of timeCards){
-        card.classList.remove("selected");
-    }
-
-    selectedTimeCard?.classList.add("selected");
-};
-
 // Auth Store
 const authStore = useAuthStore();
 
@@ -27,6 +15,7 @@ const authStore = useAuthStore();
 const taskStore = useTaskStore();
 
 taskStore.fetchAll();
+authStore.getFavourited('test');
 
 function fetchAllTasks(){
     taskStore.fetchAll();
@@ -83,8 +72,7 @@ const taskAdd = {
                     class="time__card"
                     :taskId="task.id"
                     :id=task.id 
-                    :description=task.description 
-                    @click="selectTime(1)"
+                    :description=task.description
                 />
             </div>
             <div v-if=!taskStore.tasks>
